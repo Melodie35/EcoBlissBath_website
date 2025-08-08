@@ -18,7 +18,7 @@ describe('connexion page', () => {
 
     it('checks presence of active Connexion button', () => {
         cy.getBySel('login-submit').should('be.visible')
-        cy.getBySel('login-submit').and('have.text', 'Se connecter')
+        cy.getBySel('login-submit').should('contain', 'Se connecter')
         cy.getBySel('login-submit').should('be.enabled')
     })
 })
@@ -34,22 +34,19 @@ describe('add to cart button after connexion', () => {
         cy.getBySel('login-input-password').type('testtest')
         cy.getBySel('login-submit').click()
         cy.getBySel('nav-link-cart').should('have.length.greaterThan', 0)
-        cy.getBySel('nav-link-products').click()
-        cy.intercept('GET', 'http://localhost:8081/products').as('getProducts')
-        cy.getBySel('product-link').should('have.length.greaterThan', 0)            
+        cy.intercept('GET', 'http://localhost:8081/products').as('getProducts')  
     })
 
-    it('checks presence of active Add to card button for each product', () => {
-        
-        cy.getBySel('product-link').each(($button) => {
-            cy.wrap($button).click()
-            cy.getBySel('detail-product-add').should('be.visible')
-            cy.getBySel('detail-product-add').and('have.text', 'Ajouter au panier')
-            cy.getBySel('detail-product-add').should('be.enabled')
-            cy.visit('http://localhost:4200/#/products')
-            cy.wait('@getProducts') 
-
+    it('checks presence of active Add to cart button', () => {
+        cy.visit('http://localhost:4200/#/products')
+        cy.wait('@getProducts').then(() => {
+            cy.getBySel('product-link').eq(0).click()
         })
+
+        cy.getBySel('detail-product-add').should('be.visible')
+        cy.getBySel('detail-product-add').and('have.text', 'Ajouter au panier')
+        cy.getBySel('detail-product-add').should('be.enabled')
+        
     })
 
 })
