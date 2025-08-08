@@ -35,3 +35,17 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add("getBySel", (selector, ...args) => {
+    return cy.get(`[data-cy=${selector}]`, ...args)
+})
+
+declare namespace Cypress {
+        interface Chainable {
+            /**
+            * Custom command to select DOM element by data-cy attribute.
+            * @example cy.getBySel('example')
+            */
+            getBySel(selector: string, ...args: any[]): Chainable<JQuery<HTMLElement>>
+        }
+}
