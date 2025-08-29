@@ -1,5 +1,5 @@
 // définition de l'environnement
-const apiUrl = Cypress.env('apiUrl') 
+const apiUrl = Cypress.env('apiUrl')
 
 
 //GET
