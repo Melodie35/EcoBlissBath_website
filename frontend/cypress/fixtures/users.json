@@ -1,0 +1,11 @@
+
+  {
+    "utilisateurConnu": {
+    "username": "test2@test.fr",
+    "password": "testtest"
+  },
+  "utilisateurInconnu": {
+    "username": "inconnu@test.com",
+    "password": "mauvaisMotDePasse"
+  }
+}
