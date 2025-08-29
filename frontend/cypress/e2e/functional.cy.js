@@ -1,8 +1,11 @@
+// définition de l'environnement
+const apiUrl = Cypress.env('apiUrl')
+
 //Connexion
 describe('connexion', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:4200/#/')
+        cy.visit('/')
         cy.getBySel('nav-link-login').click()
     })
 
@@ -28,27 +31,27 @@ describe('connexion', () => {
 describe('Add to the cart function', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:4200/#/')
+        cy.visit('/')
         cy.getBySel('nav-link-login').click()
         cy.getBySel('login-input-username').type('test2@test.fr')
         cy.getBySel('login-input-password').type('testtest')
         cy.getBySel('login-submit').click()
         cy.getBySel('nav-link-cart').should('have.length.greaterThan', 0)
-        cy.intercept('GET', 'http://localhost:8081/products').as('getProducts')
+        cy.intercept('GET', apiUrl + '/products').as('getProducts')
         cy.getBySel('nav-link-products').click()
-        cy.intercept('GET', 'http://localhost:8081/products/3').as('getProduct')
+        cy.intercept('GET', apiUrl + '/products/3').as('getProduct')
         cy.wait('@getProducts').then(() => {
             cy.getBySel('product-link').eq(0).click()
         })
     })
 
     //le stock doit être supérieur à 1 pour pouvoir être ajouté
-    it('checks products stock before adding to cart', () => {
+    it('checks products stock > 1 before adding to cart', () => {
         cy.wait('@getProduct').then((intercept) => {
             let stock = intercept.response.body.availableStock
             console.log(stock)
 
-            cy.intercept('PUT', 'http://localhost:8081/orders/add').as('addCart')
+            cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
             cy.getBySel('detail-product-add').click()
             if (stock > 1){
                 cy.wait('@addCart').its('response.statusCode').should('eq', 200)
@@ -62,7 +65,7 @@ describe('Add to the cart function', () => {
 
     // vérifiez que le produit a été ajouté au panier
     it('checks the product was added to the cart', () => {
-        cy.intercept('GET', 'http://localhost:8081/orders').as('getOrders')
+        cy.intercept('GET', apiUrl + '/orders').as('getOrders')
 
         cy.wait('@getProduct').then(() => {
             cy.getBySel('detail-product-add').click()
@@ -79,11 +82,11 @@ describe('Add to the cart function', () => {
 
     //vérifiez que le stock a enlevé le nombre de produits qui sont dans le panier
     it('checks the stock after adding a product to the cart', () => {
-        let beforeStock = ""
-        let addedQuantity = ""
-        let afterStock = ""
+        let beforeStock
+        let addedQuantity
+        let afterStock
 
-        cy.intercept('GET', 'http://localhost:8081/orders').as('getOrders')
+        cy.intercept('GET', apiUrl + '/orders').as('getOrders')
 
         cy.wait('@getProduct').then(({response}) => {
             beforeStock = response.body.availableStock
@@ -116,7 +119,7 @@ describe('Add to the cart function', () => {
                 .clear()
                 .type('-1')
 
-            cy.intercept('PUT', 'http://localhost:8081/orders/add').as('addCart')
+            cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
             cy.getBySel('detail-product-add').click()
             cy.wait(1000).then(() => {
                     cy.get('@addCart.all').should('have.length', 0)
@@ -132,7 +135,7 @@ describe('Add to the cart function', () => {
                 .clear()
                 .type('21')
 
-            cy.intercept('PUT', 'http://localhost:8081/orders/add').as('addCart')
+            cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
             cy.getBySel('detail-product-add').click()
             cy.wait(1000).then(() => {
                     cy.get('@addCart.all').should('have.length', 0)
@@ -143,8 +146,8 @@ describe('Add to the cart function', () => {
 
     // vérification du contenu du panier via l’API
     it('checks cart content after adding a product', () => {
-        cy.intercept('PUT', 'http://localhost:8081/orders/add').as('addCart')
-        cy.intercept('GET', 'http://localhost:8081/orders').as('getOrders')
+        cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
+        cy.intercept('GET', apiUrl + '/orders').as('getOrders')
 
         cy.wait('@getProduct').then(() => {
             cy.getBySel('detail-product-add').click()
