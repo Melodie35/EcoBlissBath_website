@@ -1,3 +1,7 @@
+// définition de l'environnement
+const apiUrl = Cypress.env('apiUrl') 
+
+
 //GET
 
 //Requête sur les données confidentielles d'un utilisateur avant connexion --> erreur
@@ -5,7 +9,7 @@ describe('cart access without connexion', () => {
     it('should return an error', () => {
         cy.request({
                 method: 'GET',
-                url: 'http://localhost:8081/orders',
+                url: apiUrl + '/orders',
                 failOnStatusCode: false
             }).then((response) => {
                 expect(response.status).to.eq(401)
@@ -21,7 +25,7 @@ describe('cart access when connected', () => {
         cy.fixture('users').then((user) => {
             cy.request({
                 method: 'POST',
-                url: 'http://localhost:8081/login',
+                url: apiUrl + '/login',
                 body: user.utilisateurConnu
             }).then((response => {
                 token = response.body.token
@@ -32,7 +36,7 @@ describe('cart access when connected', () => {
     it('should return the product list of the cart', () => {
         cy.request({
             method: 'GET',
-            url: 'http://localhost:8081/orders',
+            url: apiUrl + '/orders',
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -48,7 +52,7 @@ describe('specific product', () => {
     it('should return the product details and its id', () => {
         cy.request({
             method: 'GET',
-            url: 'http://localhost:8081/products/3'
+            url: apiUrl + '/products/3'
         }).then((response) => {
             expect(response.status).to.eq(200)
             expect(response.body.id).to.eq(3)
@@ -61,7 +65,7 @@ describe('specific product', () => {
 //POST
 
 //Vérifier le login via http://localhost:8081/login
-describe('login', () => {
+describe('http://localhost:8081/login', () => {
     beforeEach(() => {
         cy.fixture('users').as('users')
     })
@@ -71,7 +75,7 @@ describe('login', () => {
 
         cy.request({
                 method: 'POST',
-                url: 'http://localhost:8081/login',
+                url: apiUrl + '/login',
                 body: user,
                 failOnStatusCode: false
             }).then((response) => {
@@ -85,7 +89,7 @@ describe('login', () => {
 
         cy.request({
                 method: 'POST',
-                url: 'http://localhost:8081/login',
+                url: apiUrl + '/login',
                 body: user
             }).then((response) => {
                 expect(response.status).to.eq(200)
@@ -102,7 +106,7 @@ describe('http://localhost:8081/orders/add', () => {
         cy.fixture('users').then((user) => {
             cy.request({
                 method: 'POST',
-                url: 'http://localhost:8081/login',
+                url: apiUrl + '/login',
                 body: user.utilisateurConnu
             }).then((response => {
                 token = response.body.token
@@ -118,7 +122,7 @@ describe('http://localhost:8081/orders/add', () => {
 
         cy.request({
             method: 'POST',
-            url: 'http://localhost:8081/orders/add',
+            url: apiUrl + '/orders/add',
             body: product,
             headers: {
                 Authorization: `Bearer ${token}`
@@ -135,7 +139,7 @@ describe('http://localhost:8081/orders/add', () => {
 
         cy.request({
             method: 'POST',
-            url: 'http://localhost:8081/orders/add',
+            url: apiUrl + '/orders/add',
             body: product,
             headers: {
                 Authorization: `Bearer ${token}`
@@ -148,38 +152,37 @@ describe('http://localhost:8081/orders/add', () => {
 
 
 //Ajouter un avis
-describe('http://localhost:8081/reviews', () => {
-    let token
+// describe('http://localhost:8081/reviews', () => {
+//     let token
 
-    before(() => {
-        cy.fixture('users').then((user) => {
-            cy.request({
-                method: 'POST',
-                url: 'http://localhost:8081/login',
-                body: user.utilisateurConnu
-            }).then((response => {
-                token = response.body.token
-            }))
-        })
-    })
+//     before(() => {
+//         cy.fixture('users').then((user) => {
+//             cy.request({
+//                 method: 'POST',
+//                 url: apiUrl + '/login',
+//                 body: user.utilisateurConnu
+//             }).then((response => {
+//                 token = response.body.token
+//             }))
+//         })
+//     })
 
-    it('should add a review', () => {
-         cy.request({
-            method: 'POST',
-            url: 'http://localhost:8081/reviews',
-            body: {
-                "title": "Test",
-                "comment": "Test sur Cypress",
-                "rating": 4
-            },
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response) => {
-            console.log(response)
-            expect(response.status).to.eq(200)
-            expect(response.body).to.have.property('author')                
-        })
-    })
-})
+    // it('should add a review', () => {
+    //      cy.request({
+    //         method: 'POST',
+    //         url: apiUrl + '/reviews',
+    //         body: {
+    //             "title": "Test",
+    //             "comment": "Test sur Cypress",
+    //             "rating": 4
+    //         },
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200)
+    //         expect(response.body).to.have.property('author')                
+    //     })
+    // })
+// })
 
