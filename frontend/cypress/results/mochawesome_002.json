@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 2,
-    "start": "2025-09-19T10:37:54.482Z",
-    "end": "2025-09-19T10:37:56.043Z",
-    "duration": 1561,
+    "start": "2025-09-19T10:57:43.221Z",
+    "end": "2025-09-19T10:57:44.769Z",
+    "duration": 1548,
     "testsRegistered": 4,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "e2755dc6-254a-4172-8637-c893d19aab18",
+      "uuid": "01420fd1-c566-4655-962f-c839550999f3",
       "title": "",
       "fullFile": "cypress\\e2e\\smoke.cy.js",
       "file": "cypress\\e2e\\smoke.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "d0abbe35-e127-4567-ac8e-b712eee09872",
+          "uuid": "d019bd1e-649a-4cd8-b575-f2c4c02840b6",
           "title": "connexion page",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "checks presence of Email field",
               "fullTitle": "connexion page checks presence of Email field",
               "timedOut": null,
-              "duration": 787,
+              "duration": 758,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -51,8 +51,8 @@
                 "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `connexion page`\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135059:74)\n    at visitFailedByErr (http://localhost:4200/__cypress/runner/cypress_runner.js:134449:12)\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135058:11)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1667:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/smoke.cy.js:8:11)\n\nFrom Node.js Internals:\n  Error: connect ECONNREFUSED 127.0.0.1:4200\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)",
                 "diff": null
               },
-              "uuid": "e4b84181-be99-40cf-bb91-baf668e5b7de",
-              "parentUUID": "d0abbe35-e127-4567-ac8e-b712eee09872",
+              "uuid": "dcc48305-130a-4e0e-b753-68a1352d31a8",
+              "parentUUID": "d019bd1e-649a-4cd8-b575-f2c4c02840b6",
               "isHook": false,
               "skipped": false
             },
@@ -69,8 +69,8 @@
               "context": null,
               "code": "cy.getBySel('login-input-password').should('be.visible').should('have.attr', 'type', 'password');",
               "err": {},
-              "uuid": "84674b67-0fc0-4ded-8b10-705f47011b0f",
-              "parentUUID": "d0abbe35-e127-4567-ac8e-b712eee09872",
+              "uuid": "a8bf2254-3ba4-43a3-be1d-081784fddd71",
+              "parentUUID": "d019bd1e-649a-4cd8-b575-f2c4c02840b6",
               "isHook": false,
               "skipped": true
             },
@@ -87,8 +87,8 @@
               "context": null,
               "code": "cy.getBySel('login-submit').should('be.visible').should('contain', 'Se connecter').should('be.enabled');",
               "err": {},
-              "uuid": "41b99684-f3c7-4a92-aac2-d79d251aaf47",
-              "parentUUID": "d0abbe35-e127-4567-ac8e-b712eee09872",
+              "uuid": "066c2437-a8cd-4163-9171-d10b4280eba0",
+              "parentUUID": "d019bd1e-649a-4cd8-b575-f2c4c02840b6",
               "isHook": false,
               "skipped": true
             }
@@ -96,20 +96,20 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "e4b84181-be99-40cf-bb91-baf668e5b7de"
+            "dcc48305-130a-4e0e-b753-68a1352d31a8"
           ],
           "pending": [],
           "skipped": [
-            "84674b67-0fc0-4ded-8b10-705f47011b0f",
-            "41b99684-f3c7-4a92-aac2-d79d251aaf47"
+            "a8bf2254-3ba4-43a3-be1d-081784fddd71",
+            "066c2437-a8cd-4163-9171-d10b4280eba0"
           ],
-          "duration": 787,
+          "duration": 758,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "e17edc14-8c93-4ae3-8156-cb2631f7c48c",
+          "uuid": "419c077f-62f4-4f8a-bcb4-dec5f440037d",
           "title": "add to cart button after connexion",
           "fullFile": "",
           "file": "",
@@ -120,7 +120,7 @@
               "title": "checks presence of active Add to cart button",
               "fullTitle": "add to cart button after connexion checks presence of active Add to cart button",
               "timedOut": null,
-              "duration": 696,
+              "duration": 695,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -133,8 +133,8 @@
                 "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `add to cart button after co...`\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135059:74)\n    at visitFailedByErr (http://localhost:4200/__cypress/runner/cypress_runner.js:134449:12)\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135058:11)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1667:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/smoke.cy.js:36:11)\n\nFrom Node.js Internals:\n  Error: connect ECONNREFUSED 127.0.0.1:4200\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)",
                 "diff": null
               },
-              "uuid": "ca8f5985-d5db-452f-9544-38fe8443a482",
-              "parentUUID": "e17edc14-8c93-4ae3-8156-cb2631f7c48c",
+              "uuid": "d3058d0b-259e-48d5-bde1-9cf23c8234fc",
+              "parentUUID": "419c077f-62f4-4f8a-bcb4-dec5f440037d",
               "isHook": false,
               "skipped": false
             }
@@ -142,11 +142,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "ca8f5985-d5db-452f-9544-38fe8443a482"
+            "d3058d0b-259e-48d5-bde1-9cf23c8234fc"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 696,
+          "duration": 695,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

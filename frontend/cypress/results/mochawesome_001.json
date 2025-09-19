@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 2,
-    "start": "2025-09-19T10:37:51.047Z",
-    "end": "2025-09-19T10:37:52.657Z",
-    "duration": 1610,
+    "start": "2025-09-19T10:57:39.992Z",
+    "end": "2025-09-19T10:57:41.564Z",
+    "duration": 1572,
     "testsRegistered": 9,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "ee10c7a7-821a-4895-afd6-124493467382",
+      "uuid": "a56764aa-f992-42c1-9161-28a0261d0dab",
       "title": "",
       "fullFile": "cypress\\e2e\\functional.cy.js",
       "file": "cypress\\e2e\\functional.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "a8bd5bb6-e081-4faf-8523-da9edf8a4b5f",
+          "uuid": "26e0a44b-2726-4184-bd4e-9ece392897b4",
           "title": "connexion",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "gets the connexion form",
               "fullTitle": "connexion gets the connexion form",
               "timedOut": null,
-              "duration": 769,
+              "duration": 789,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -51,8 +51,8 @@
                 "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `connexion`\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135059:74)\n    at visitFailedByErr (http://localhost:4200/__cypress/runner/cypress_runner.js:134449:12)\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135058:11)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1667:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/functional.cy.js:8:11)\n\nFrom Node.js Internals:\n  Error: connect ECONNREFUSED 127.0.0.1:4200\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)",
                 "diff": null
               },
-              "uuid": "4933e23a-9978-40f7-8b77-96030b913bfe",
-              "parentUUID": "a8bd5bb6-e081-4faf-8523-da9edf8a4b5f",
+              "uuid": "92bf6ca5-93bc-4724-a55e-2a5061f1eea2",
+              "parentUUID": "26e0a44b-2726-4184-bd4e-9ece392897b4",
               "isHook": false,
               "skipped": false
             },
@@ -69,8 +69,8 @@
               "context": null,
               "code": "cy.getBySel('login-input-username').type('test2@test.fr');\ncy.getBySel('login-input-password').type('testtest');\ncy.getBySel('login-submit').click();\ncy.getBySel('nav-link-cart').should('be.visible');\ncy.getBySel('nav-link-logout').should('be.visible');",
               "err": {},
-              "uuid": "1363bd65-1841-49af-b821-815c742e733d",
-              "parentUUID": "a8bd5bb6-e081-4faf-8523-da9edf8a4b5f",
+              "uuid": "a4b7dbea-eed7-4b3e-80cb-d4e366cccd83",
+              "parentUUID": "26e0a44b-2726-4184-bd4e-9ece392897b4",
               "isHook": false,
               "skipped": true
             }
@@ -78,19 +78,19 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "4933e23a-9978-40f7-8b77-96030b913bfe"
+            "92bf6ca5-93bc-4724-a55e-2a5061f1eea2"
           ],
           "pending": [],
           "skipped": [
-            "1363bd65-1841-49af-b821-815c742e733d"
+            "a4b7dbea-eed7-4b3e-80cb-d4e366cccd83"
           ],
-          "duration": 769,
+          "duration": 789,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+          "uuid": "147992f6-735b-4099-a653-bdcf09079d9d",
           "title": "Add to the cart function",
           "fullFile": "",
           "file": "",
@@ -101,7 +101,7 @@
               "title": "checks products stock > 1 before adding to cart",
               "fullTitle": "Add to the cart function checks products stock > 1 before adding to cart",
               "timedOut": null,
-              "duration": 724,
+              "duration": 696,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -114,8 +114,8 @@
                 "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Add to the cart function`\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135059:74)\n    at visitFailedByErr (http://localhost:4200/__cypress/runner/cypress_runner.js:134449:12)\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135058:11)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1667:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/functional.cy.js:34:11)\n\nFrom Node.js Internals:\n  Error: connect ECONNREFUSED 127.0.0.1:4200\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)",
                 "diff": null
               },
-              "uuid": "8e6badca-558c-4602-899a-ce49a3ea7e1a",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "c6bd0ae5-fa8e-44d8-81dc-6d2f90da8fac",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": false
             },
@@ -132,8 +132,8 @@
               "context": null,
               "code": "cy.intercept('GET', apiUrl + '/orders').as('getOrders');\ncy.wait('@getProduct').then(() => {\n  cy.getBySel('detail-product-add').click();\n});\ncy.wait('@getOrders').then(() => {\n  cy.getBySel('cart-line').should('have.length.greaterThan', 0);\n  cy.getBySel('cart-line-quantity').invoke('val').then(val => expect(+val).to.be.at.least(1));\n});",
               "err": {},
-              "uuid": "02371099-4a19-4bf7-9e15-d6ee11e798f7",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "6f20bc54-8899-406b-8512-fa0a41ed68ed",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": true
             },
@@ -150,8 +150,8 @@
               "context": null,
               "code": "let beforeStock;\nlet addedQuantity;\nlet afterStock;\ncy.intercept('GET', apiUrl + '/orders').as('getOrders');\ncy.wait('@getProduct').then(({\n  response\n}) => {\n  beforeStock = response.body.availableStock;\n  cy.getBySel('detail-product-quantity').invoke('val').then(val => addedQuantity = Number(val));\n  cy.getBySel('detail-product-add').click();\n});\ncy.wait('@getOrders').then(() => {\n  cy.getBySel('nav-link-products').click();\n});\ncy.wait('@getProducts').then(() => {\n  cy.getBySel('product-link').eq(0).click();\n});\ncy.wait('@getProduct').then(({\n  response\n}) => {\n  afterStock = response.body.availableStock;\n  expect(afterStock).to.equal(beforeStock - addedQuantity);\n});",
               "err": {},
-              "uuid": "77b1f567-19dc-4f31-b849-b19b634d5def",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "b8ebe02e-c2bc-466e-9787-992c4133cbb7",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": true
             },
@@ -168,8 +168,8 @@
               "context": null,
               "code": "cy.wait('@getProduct').then(() => {\n  cy.getBySel('detail-product-quantity').clear().type('-1');\n  cy.intercept('PUT', apiUrl + '/orders/add').as('addCart');\n  cy.getBySel('detail-product-add').click();\n  cy.wait(1000).then(() => {\n    cy.get('@addCart.all').should('have.length', 0);\n  });\n});",
               "err": {},
-              "uuid": "377029da-85b8-4cff-8707-0f8dfce6a3cc",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "5be37e9b-0565-44cf-b594-100ad5736299",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": true
             },
@@ -186,8 +186,8 @@
               "context": null,
               "code": "cy.wait('@getProduct').then(() => {\n  cy.getBySel('detail-product-quantity').clear().type('21');\n  cy.intercept('PUT', apiUrl + '/orders/add').as('addCart');\n  cy.getBySel('detail-product-add').click();\n  cy.wait(1000).then(() => {\n    cy.get('@addCart.all').should('have.length', 0);\n  });\n});",
               "err": {},
-              "uuid": "bf3820f5-3881-4c93-9604-4802dff921a8",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "e5af326a-70f6-43a1-8516-5d7294515d6f",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": true
             },
@@ -204,8 +204,8 @@
               "context": null,
               "code": "cy.intercept('PUT', apiUrl + '/orders/add').as('addCart');\ncy.intercept('GET', apiUrl + '/orders').as('getOrders');\ncy.wait('@getProduct').then(() => {\n  cy.getBySel('detail-product-add').click();\n});\ncy.wait('@addCart').then(intercept => {\n  cy.getBySel('cart-line').should('have.length.greaterThan', 0);\n  expect(intercept.response.statusCode).to.eq(200);\n  expect(intercept.response.body.orderLines).to.exist;\n  expect(intercept.response.body.orderLines[0].product).to.deep.include({\n    id: 3,\n    name: \"Sentiments printaniers\",\n    description: \"Savon avec une formule douce à base d’huile de framboise, de citron et de menthe qui nettoie les mains efficacement sans les dessécher.\",\n    price: 60\n  });\n  expect(intercept.request.body).to.deep.include({\n    product: 3\n  });\n});\ncy.wait('@getOrders').its('response.statusCode').should('eq', 200);",
               "err": {},
-              "uuid": "f7739975-2ce6-4131-b12a-e809f4ef0814",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "ec3807f1-695c-46dc-be7b-852c0f469604",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": true
             },
@@ -222,8 +222,8 @@
               "context": null,
               "code": "cy.wait('@getProduct').then(() => {\n  cy.getBySel('detail-product-stock').should('have.length.greaterThan', 0);\n});",
               "err": {},
-              "uuid": "e16d68a3-7677-4a65-ace4-2f5fba17210f",
-              "parentUUID": "36e55f47-c2a0-4154-9247-9a0ede87dd3f",
+              "uuid": "70bae81a-debe-4fc3-8560-90cf15389c78",
+              "parentUUID": "147992f6-735b-4099-a653-bdcf09079d9d",
               "isHook": false,
               "skipped": true
             }
@@ -231,18 +231,18 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "8e6badca-558c-4602-899a-ce49a3ea7e1a"
+            "c6bd0ae5-fa8e-44d8-81dc-6d2f90da8fac"
           ],
           "pending": [],
           "skipped": [
-            "02371099-4a19-4bf7-9e15-d6ee11e798f7",
-            "77b1f567-19dc-4f31-b849-b19b634d5def",
-            "377029da-85b8-4cff-8707-0f8dfce6a3cc",
-            "bf3820f5-3881-4c93-9604-4802dff921a8",
-            "f7739975-2ce6-4131-b12a-e809f4ef0814",
-            "e16d68a3-7677-4a65-ace4-2f5fba17210f"
+            "6f20bc54-8899-406b-8512-fa0a41ed68ed",
+            "b8ebe02e-c2bc-466e-9787-992c4133cbb7",
+            "5be37e9b-0565-44cf-b594-100ad5736299",
+            "e5af326a-70f6-43a1-8516-5d7294515d6f",
+            "ec3807f1-695c-46dc-be7b-852c0f469604",
+            "70bae81a-debe-4fc3-8560-90cf15389c78"
           ],
-          "duration": 724,
+          "duration": 696,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
