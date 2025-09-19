@@ -35,6 +35,9 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0",
     "typescript": "~4.6.2"
   }
 }

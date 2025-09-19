@@ -50,13 +50,13 @@ Configurer Cypress
 ```
 npx cypress open
 ```  
-Ouverture du **Dashboard** Cypress :   
+Ouverture du **launchpad** de Cypress :   
 * Cliquer sur "E2E Testing"
 * Cliquer sur "Continue"  
 * Sélectionner votre browser préféré
 
 ### Exécuter les tests
-Lancer le Dashboard
+Lancer le launchpad
 ```
 cd ./frontend
 npx cypress open
