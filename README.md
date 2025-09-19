@@ -38,3 +38,27 @@ ou
 npm install (si vous préférez)
 ```
 
+# Pour lancer les tests automatisé avec Cypress
+### Utilisation de Cypress pour la première fois
+Installer Cypress
+```
+cd ./frontend
+npm install cypress --save-dev
+```
+Configurer Cypress
+```
+npx cypress open
+```  
+Ouverture du **Dashboard** Cypress   
+* Cliquer sur "E2E Testing"
+* Cliquer sur "Continue"  
+* Sélectionner votre browser préféré
+
+### Exécuter les tests
+Lancer le Dashboard
+```
+cd ./frontend
+npx cypress open
+```
+Cliquer sur "Start E2E Testing in Election"
+Sélectionner le scipt à tester
