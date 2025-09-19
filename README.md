@@ -60,5 +60,5 @@ Lancer le Dashboard
 cd ./frontend
 npx cypress open
 ```
-Cliquer sur "Start E2E Testing in Election"
-Sélectionner le scipt à tester
+* Cliquer sur "Start E2E Testing in Election"
+* Sélectionner le script à tester
