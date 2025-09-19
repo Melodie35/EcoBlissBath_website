@@ -38,6 +38,10 @@ npm i
 ou
 npm install (si vous préférez)
 ```
+Lancer l'interface
+```
+npm start
+```
 
 # Pour lancer les tests automatisé avec Cypress
 ### Utilisation de Cypress pour la première fois
@@ -56,10 +60,16 @@ Ouverture du **launchpad** de Cypress :
 * Sélectionner votre browser préféré
 
 ### Exécuter les tests
-Lancer le launchpad
+Via le launchpad
 ```
 cd ./frontend
 npx cypress open
 ```
 * Cliquer sur "Start E2E Testing"
 * Sélectionner le script à tester
+
+Générer le rapport
+```
+cd ./frontend
+npx cypress run
+```
