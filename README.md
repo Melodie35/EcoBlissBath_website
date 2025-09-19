@@ -8,6 +8,7 @@
     <img src="https://img.shields.io/badge/Symfony-v6.2-blue">
     <img src="https://img.shields.io/badge/Angular-v13.3.0-blue">
     <img src="https://img.shields.io/badge/docker--build-passing-brightgreen">
+    <img src="https://img.shields.io/badge/Cypress-v14.5.2-blue">
   <br><br><br>
 </p>
 
@@ -60,5 +61,5 @@ Lancer le Dashboard
 cd ./frontend
 npx cypress open
 ```
-* Cliquer sur "Start E2E Testing in Election"
+* Cliquer sur "Start E2E Testing"
 * Sélectionner le script à tester
