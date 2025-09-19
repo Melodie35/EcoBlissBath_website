@@ -49,7 +49,7 @@ Configurer Cypress
 ```
 npx cypress open
 ```  
-Ouverture du **Dashboard** Cypress   
+Ouverture du **Dashboard** Cypress :   
 * Cliquer sur "E2E Testing"
 * Cliquer sur "Continue"  
 * Sélectionner votre browser préféré
