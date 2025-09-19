@@ -152,37 +152,37 @@ describe('http://localhost:8081/orders/add', () => {
 
 
 //Ajouter un avis
-// describe('http://localhost:8081/reviews', () => {
-//     let token
+describe('http://localhost:8081/reviews', () => {
+    let token
 
-//     before(() => {
-//         cy.fixture('users').then((user) => {
-//             cy.request({
-//                 method: 'POST',
-//                 url: apiUrl + '/login',
-//                 body: user.utilisateurConnu
-//             }).then((response => {
-//                 token = response.body.token
-//             }))
-//         })
-//     })
+    before(() => {
+        cy.fixture('users').then((user) => {
+            cy.request({
+                method: 'POST',
+                url: apiUrl + '/login',
+                body: user.utilisateurConnu
+            }).then((response => {
+                token = response.body.token
+            }))
+        })
+    })
 
-    // it('should add a review', () => {
-    //      cy.request({
-    //         method: 'POST',
-    //         url: apiUrl + '/reviews',
-    //         body: {
-    //             "title": "Test",
-    //             "comment": "Test sur Cypress",
-    //             "rating": 4
-    //         },
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     }).then((response) => {
-    //         expect(response.status).to.eq(200)
-    //         expect(response.body).to.have.property('author')                
-    //     })
-    // })
-// })
+    it('should add a review', () => {
+         cy.request({
+            method: 'POST',
+            url: apiUrl + '/reviews',
+            body: {
+                "title": "Test",
+                "comment": "Test sur Cypress",
+                "rating": 4
+            },
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200)
+            expect(response.body).to.have.property('author')                
+        })
+    })
+})
 
