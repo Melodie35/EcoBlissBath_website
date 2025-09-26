@@ -80,7 +80,7 @@ declare global {
             /**
             * Custom command to log in in login API with a known user from the fixture users.json as default and store the token
             * @example cy.loginAPI()
-            * @example cy.loginAPI('utilisateurInconnu')
+            * @example cy.loginAPI('utilisateurInconnu', false)
             */
             loginAPI(userKey?: string): Chainable<void>
 
