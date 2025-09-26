@@ -1,41 +1,7 @@
+import apiRoutes from './apiRoutes'
+
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
-//******************************************************************************************************** */
+
 
 
 Cypress.Commands.add("getBySel", (selector, ...args) => {
@@ -54,9 +20,50 @@ Cypress.Commands.add("login", () => {
     })
 })
 
+Cypress.Commands.add("loginAPI", (userKey = 'utilisateurConnu', failOnError = true) => {
+    cy.fixture('users').then((users) => {
+        const user = users[userKey]
 
+        if (!user) {
+            throw new Error(`Utilisateur "${userKey}" non trouvé dans users.json`)
+        }
 
-declare namespace Cypress {
+        cy.request({
+            method: 'POST',
+            url: apiRoutes.login,
+            body: user,
+            failOnStatusCode: failOnError 
+        }).then((response) => {
+            if(response.status == 200) {
+                window.localStorage.setItem('userToken', response.body.token)
+            }            
+        })
+    })
+})
+
+Cypress.Commands.add('getToken', () => {
+    return cy.wrap(localStorage.getItem('userToken')).then((token) => {
+        if (!token) {
+            throw new Error('Token non trouvé dans le localStorage')
+        }
+    return token
+    })
+})
+
+Cypress.Commands.add('authRequest', (options) => {
+    return cy.getToken().then((token) => {
+        return cy.request({
+            ...options,
+            headers: {
+                ...(options.headers || {}),
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    })
+})
+
+declare global {
+    namespace Cypress {
         interface Chainable {
             /**
             * Custom command to select DOM element by data-cy attribute.
@@ -69,5 +76,25 @@ declare namespace Cypress {
             * @example cy.login()
             */
             login(): Chainable<void>
-        }
+
+            /**
+            * Custom command to log in in login API with a known user from the fixture users.json as default and store the token
+            * @example cy.loginAPI()
+            * @example cy.loginAPI('utilisateurInconnu')
+            */
+            loginAPI(userKey?: string): Chainable<void>
+
+            /**
+            * Custom command to get the token from localStorage
+            * @returns Le token sous forme de string
+            */
+            getToken(): Chainable<string>
+
+            /**
+            * Custom command for HTTP request with stored token in header Authorization
+            * @param options Options for cy.request
+            */
+            authRequest(options: Partial<Cypress.RequestOptions>): Chainable<Cypress.Response<any>>
+        }    
+    }
 }

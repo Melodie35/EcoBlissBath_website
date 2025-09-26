@@ -1,6 +1,4 @@
-// définition de l'environnement
-const apiUrl = Cypress.env('apiUrl')
-
+import apiRoutes from '../support/apiRoutes'
 
 //GET
 
@@ -9,7 +7,7 @@ describe('cart access without connexion', () => {
     it('should return an error', () => {
         cy.request({
                 method: 'GET',
-                url: apiUrl + '/orders',
+                url: apiRoutes.orders,
                 failOnStatusCode: false
             }).then((response) => {
                 expect(response.status).to.eq(401)
@@ -19,44 +17,43 @@ describe('cart access without connexion', () => {
 
 //Requête de la liste des produits du panier
 describe('cart access when connected', () => {
-    let token
-
     before(() => {
-        cy.fixture('users').then((user) => {
-            cy.request({
-                method: 'POST',
-                url: apiUrl + '/login',
-                body: user.utilisateurConnu
-            }).then((response => {
-                token = response.body.token
-            }))
-        })        
+        cy.loginAPI() 
     })
     
-    it('should return the product list of the cart', () => {
-        cy.request({
+    it('should return the product list of the cart', () => {        
+        cy.authRequest({
             method: 'GET',
-            url: apiUrl + '/orders',
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+            url: apiRoutes.orders
         }).then((response) => {
             expect(response.status).to.eq(200)
-            expect(response.body.orderLines).to.be.an('array')                
-        })   
-    })
+            expect(response.body.orderLines).to.be.an('array')
+        })
+    }) 
 })
+
 
 //Requête d’une fiche produit spécifique
 describe('specific product', () => {
     it('should return the product details and its id', () => {
         cy.request({
             method: 'GET',
-            url: apiUrl + '/products/3'
+            url: apiRoutes.product(3)
         }).then((response) => {
             expect(response.status).to.eq(200)
             expect(response.body.id).to.eq(3)
-            expect(response.body).to.have.keys('id', 'name','availableStock', 'skin', 'aromas', 'ingredients', 'description', 'price', 'picture', 'varieties')
+            expect(response.body).to.have.keys(
+                'id',
+                'name',
+                'availableStock', 
+                'skin', 
+                'aromas', 
+                'ingredients', 
+                'description', 
+                'price', 
+                'picture', 
+                'varieties'
+            )
         })
     })
 })
@@ -66,32 +63,18 @@ describe('specific product', () => {
 
 //Vérifier le login via http://localhost:8081/login
 describe('http://localhost:8081/login', () => {
-    beforeEach(() => {
-        cy.fixture('users').as('users')
-    })
-
-    it('should return error 401 with unknown user', function () {
-        const user = this.users.utilisateurInconnu
-
-        cy.request({
-                method: 'POST',
-                url: apiUrl + '/login',
-                body: user,
-                failOnStatusCode: false
-            }).then((response) => {
+    
+    it('should return error 401 with unknown user', () => {
+        cy.loginAPI('utilisateurInconnu', false)
+            .then((response) => {
                 expect(response.status).to.eq(401)
                 expect(response.body).to.deep.include({ message: "Invalid credentials." })
             })        
     })
 
     it('should return 200 with known user', function () {
-        const user = this.users.utilisateurConnu
-
-        cy.request({
-                method: 'POST',
-                url: apiUrl + '/login',
-                body: user
-            }).then((response) => {
+        cy.loginAPI()
+            .then((response) => {
                 expect(response.status).to.eq(200)
                 expect(response.body).to.have.property('token')
             })        
@@ -100,19 +83,9 @@ describe('http://localhost:8081/login', () => {
 
 //Ajouter un produit au panier
 describe('http://localhost:8081/orders/add', () => {
-    let token
 
     beforeEach(() => {
-        cy.fixture('users').then((user) => {
-            cy.request({
-                method: 'POST',
-                url: apiUrl + '/login',
-                body: user.utilisateurConnu
-            }).then((response => {
-                token = response.body.token
-            }))
-        })
-        
+        cy.loginAPI()
         cy.fixture('products').as('products')
     })
 
@@ -120,13 +93,10 @@ describe('http://localhost:8081/orders/add', () => {
     it('should add a product available', function () {
         const product = this.products.disponible
 
-        cy.request({
+        cy.authRequest({
             method: 'POST',
-            url: apiUrl + '/orders/add',
-            body: product,
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+            url: apiRoutes.addOrder,
+            body: product
         }).then((response) => {
             expect(response.status).to.eq(200)
             expect(response.body.orderLines).to.be.an('array')                
@@ -137,13 +107,10 @@ describe('http://localhost:8081/orders/add', () => {
     it('should not add a product unavailable', function () {
         const product = this.products.rupture
 
-        cy.request({
+        cy.authRequest({
             method: 'POST',
-            url: apiUrl + '/orders/add',
-            body: product,
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+            url: apiRoutes.addOrder,
+            body: product
         }).then((response) => {
             expect(response.status).to.not.eq(200)               
         })
@@ -153,35 +120,27 @@ describe('http://localhost:8081/orders/add', () => {
 
 //Ajouter un avis
 describe('http://localhost:8081/reviews', () => {
-    let token
 
     before(() => {
-        cy.fixture('users').then((user) => {
-            cy.request({
-                method: 'POST',
-                url: apiUrl + '/login',
-                body: user.utilisateurConnu
-            }).then((response => {
-                token = response.body.token
-            }))
-        })
+        cy.loginAPI()
     })
 
     it('should add a review', () => {
-         cy.request({
+        const timestamp = Date.now()
+
+         cy.authRequest({
             method: 'POST',
-            url: apiUrl + '/reviews',
+            url: apiRoutes.reviews,
             body: {
                 "title": "Test",
-                "comment": "Test sur Cypress",
+                "comment": `test Cypress ${timestamp}`,
                 "rating": 4
-            },
-            headers: {
-                Authorization: `Bearer ${token}`
             }
         }).then((response) => {
             expect(response.status).to.eq(200)
-            expect(response.body).to.have.property('author')                
+            expect(response.body).to.have.property('title', 'Test')
+            expect(response.body).to.have.property('rating', 4)
+            expect(response.body.comment).to.eq(`test Cypress ${timestamp}`)
         })
     })
 })

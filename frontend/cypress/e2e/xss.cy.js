@@ -1,5 +1,4 @@
-// définition de l'environnement
-const apiUrl = Cypress.env('apiUrl')
+import apiRoutes from "../support/apiRoutes"
 
 //Faille XSS
 describe('XSS vulnerability', () => {
@@ -16,7 +15,7 @@ describe('XSS vulnerability', () => {
         const timestamp = Date.now()
         cy.getBySel('review-input-title').type(`test Cypress ${timestamp}`)
         cy.getBySel('review-input-comment').type('<script> location.href = "https://www.google.com"</script>')
-        cy.intercept('GET', apiUrl + '/reviews').as('getReviews')
+        cy.intercept('GET', apiRoutes.reviews).as('getReviews')
         cy.getBySel('review-submit').click()
 
         cy.wait('@getReviews').then(() => {
@@ -32,7 +31,7 @@ describe('XSS vulnerability', () => {
         const timestamp2 = Date.now()
         cy.getBySel('review-input-title').type('<script> location.href = "https://www.google.com"</script>')
         cy.getBySel('review-input-comment').type(`test Cypress ${timestamp2}`)
-        cy.intercept('GET', apiUrl + '/reviews').as('getReviews')
+        cy.intercept('GET', apiRoutes.reviews).as('getReviews')
         cy.getBySel('review-submit').click()
 
         cy.wait('@getReviews').then(() => {

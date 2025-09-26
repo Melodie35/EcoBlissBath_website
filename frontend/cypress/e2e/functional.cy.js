@@ -1,5 +1,4 @@
-// définition de l'environnement
-const apiUrl = Cypress.env('apiUrl')
+import apiRoutes from "../support/apiRoutes"
 
 //Connexion
 describe('connexion', () => {
@@ -32,9 +31,9 @@ describe('Add to the cart function', () => {
 
     beforeEach(() => {
         cy.login()
-        cy.intercept('GET', apiUrl + '/products').as('getProducts')
+        cy.intercept('GET', apiRoutes.products).as('getProducts')
         cy.getBySel('nav-link-products').click()
-        cy.intercept('GET', apiUrl + '/products/3').as('getProduct')
+        cy.intercept('GET', apiRoutes.product(3)).as('getProduct')
         cy.wait('@getProducts').then(() => {
             cy.getBySel('product-link').eq(0).click()
         })
@@ -45,7 +44,7 @@ describe('Add to the cart function', () => {
         cy.wait('@getProduct').then((intercept) => {
             let stock = intercept.response.body.availableStock
 
-            cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
+            cy.intercept('PUT', apiRoutes.addOrder).as('addCart')
             cy.getBySel('detail-product-add').click()
             if (stock > 1){
                 cy.wait('@addCart').its('response.statusCode').should('eq', 200)
@@ -59,7 +58,7 @@ describe('Add to the cart function', () => {
 
     // vérifiez que le produit a été ajouté au panier
     it('checks the product was added to the cart', () => {
-        cy.intercept('GET', apiUrl + '/orders').as('getOrders')
+        cy.intercept('GET', apiRoutes.orders).as('getOrders')
 
         cy.wait('@getProduct').then(() => {
             cy.getBySel('detail-product-add').click()
@@ -80,7 +79,7 @@ describe('Add to the cart function', () => {
         let addedQuantity
         let afterStock
 
-        cy.intercept('GET', apiUrl + '/orders').as('getOrders')
+        cy.intercept('GET', apiRoutes.orders).as('getOrders')
 
         cy.wait('@getProduct').then(({response}) => {
             beforeStock = response.body.availableStock
@@ -113,7 +112,7 @@ describe('Add to the cart function', () => {
                 .clear()
                 .type('-1')
 
-            cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
+            cy.intercept('PUT', apiRoutes.addOrder).as('addCart')
             cy.getBySel('detail-product-add').click()
             cy.wait(1000).then(() => {
                     cy.get('@addCart.all').should('have.length', 0)
@@ -129,7 +128,7 @@ describe('Add to the cart function', () => {
                 .clear()
                 .type('21')
 
-            cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
+            cy.intercept('PUT', apiRoutes.addOrder).as('addCart')
             cy.getBySel('detail-product-add').click()
             cy.wait(1000).then(() => {
                     cy.get('@addCart.all').should('have.length', 0)
@@ -140,8 +139,8 @@ describe('Add to the cart function', () => {
 
     // vérification du contenu du panier via l’API
     it('checks cart content after adding a product', () => {
-        cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
-        cy.intercept('GET', apiUrl + '/orders').as('getOrders')
+        cy.intercept('PUT', apiRoutes.addOrder).as('addCart')
+        cy.intercept('GET', apiRoutes.orders).as('getOrders')
 
         cy.wait('@getProduct').then(() => {
             cy.getBySel('detail-product-add').click()
@@ -151,7 +150,11 @@ describe('Add to the cart function', () => {
             cy.getBySel('cart-line').should('have.length.greaterThan', 0)
             expect(intercept.response.statusCode).to.eq(200)
             expect(intercept.response.body.orderLines).to.exist
-            expect(intercept.response.body.orderLines[0].product).to.deep.include({ id: 3, name: "Sentiments printaniers", description: "Savon avec une formule douce à base d’huile de framboise, de citron et de menthe qui nettoie les mains efficacement sans les dessécher.", price: 60 })
+            expect(intercept.response.body.orderLines[0].product).to.deep.include({ 
+                id: 3, name: "Sentiments printaniers", 
+                description: "Savon avec une formule douce à base d’huile de framboise, de citron et de menthe qui nettoie les mains efficacement sans les dessécher.", 
+                price: 60 
+            })
             expect(intercept.request.body).to.deep.include({ product: 3 })
             })
         

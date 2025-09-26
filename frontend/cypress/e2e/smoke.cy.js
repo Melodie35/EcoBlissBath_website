@@ -1,5 +1,4 @@
-// définition de l'environnement
-const apiUrl = Cypress.env('apiUrl')
+import apiRoutes from "../support/apiRoutes"
 
 //Vérifier la présence des champs et boutons de connexion
 describe('connexion page', () => {
@@ -34,7 +33,7 @@ describe('add to cart button after connexion', () => {
 
     beforeEach(() => {
         cy.login()
-        cy.intercept('GET', apiUrl + '/products').as('getProducts')  
+        cy.intercept('GET', apiRoutes.products).as('getProducts')  
     })
 
     it('checks presence of active Add to cart button', () => {
