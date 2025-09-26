@@ -5,11 +5,7 @@ const apiUrl = Cypress.env('apiUrl')
 describe('XSS vulnerability', () => {
 
     beforeEach(() => {
-        cy.visit('/login')
-        cy.getBySel('login-input-username').type('test2@test.fr')
-        cy.getBySel('login-input-password').type('testtest')
-        cy.getBySel('login-submit').click()
-        cy.getBySel('nav-link-cart').should('have.length.greaterThan', 0)
+        cy.login()
         cy.visit('/reviews')
     })
 

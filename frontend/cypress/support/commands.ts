@@ -35,10 +35,26 @@
 //     }
 //   }
 // }
+//******************************************************************************************************** */
+
 
 Cypress.Commands.add("getBySel", (selector, ...args) => {
     return cy.get(`[data-cy=${selector}]`, ...args)
 })
+
+Cypress.Commands.add("login", () => {
+    cy.fixture('users').then((user) => {
+        const knownUser = user['utilisateurConnu']
+
+        cy.visit('/login')
+        cy.getBySel('login-input-username').type(knownUser.username)
+        cy.getBySel('login-input-password').type(knownUser.password)
+        cy.getBySel('login-submit').click()
+        cy.getBySel('nav-link-cart').should('have.length.greaterThan', 0)
+    })
+})
+
+
 
 declare namespace Cypress {
         interface Chainable {
@@ -47,5 +63,11 @@ declare namespace Cypress {
             * @example cy.getBySel('example')
             */
             getBySel(selector: string, ...args: any[]): Chainable<JQuery<HTMLElement>>
+
+            /**
+            * Custom command to log in in UI with a known user.
+            * @example cy.login()
+            */
+            login(): Chainable<void>
         }
 }

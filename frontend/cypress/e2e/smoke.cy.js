@@ -33,11 +33,7 @@ describe('connexion page', () => {
 describe('add to cart button after connexion', () => {
 
     beforeEach(() => {
-        cy.visit('/login')
-        cy.getBySel('login-input-username').type('test2@test.fr')
-        cy.getBySel('login-input-password').type('testtest')
-        cy.getBySel('login-submit').click()
-        cy.getBySel('nav-link-cart').should('have.length.greaterThan', 0)
+        cy.login()
         cy.intercept('GET', apiUrl + '/products').as('getProducts')  
     })
 
