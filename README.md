@@ -17,6 +17,9 @@ Pour démarrer cet applicatif web vous devez avoir les outils suivants:
 - Docker
 - NodeJs
 
+Pour les tests automatisés:
+- Cypress
+
 # Installation et démarrage
 Clonez le projet pour le récupérer
 ``` 
@@ -43,9 +46,8 @@ Lancer l'interface
 npm start
 ```
 
-# Pour lancer les tests automatisé avec Cypress
-### Utilisation de Cypress pour la première fois
-Installer Cypress
+# Pour lancer les tests automatisés avec Cypress
+### Installer Cypress
 ```
 cd ./frontend
 npm install cypress --save-dev

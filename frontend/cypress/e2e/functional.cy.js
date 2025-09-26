@@ -49,7 +49,6 @@ describe('Add to the cart function', () => {
     it('checks products stock > 1 before adding to cart', () => {
         cy.wait('@getProduct').then((intercept) => {
             let stock = intercept.response.body.availableStock
-            console.log(stock)
 
             cy.intercept('PUT', apiUrl + '/orders/add').as('addCart')
             cy.getBySel('detail-product-add').click()
